@@ -332,15 +332,28 @@ ul { padding: 0; margin: 0; list-style: none; }
 .wmap-panel {
   position: relative;
   background:
-    radial-gradient(900px 420px at 72% 4%, rgba(194, 160, 69, .13), transparent 60%),
+    radial-gradient(140% 120% at 50% 42%, var(--navy-800) 0%, var(--navy-900) 48%, var(--navy-950) 100%),
     var(--navy-950);
   border-radius: var(--radius-lg);
-  padding: clamp(16px, 3vw, 36px);
+  padding: clamp(12px, 2vw, 24px);
   box-shadow: var(--shadow-md);
   overflow: hidden;
 }
+.wmap-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(760px 380px at 55% 30%, rgba(194, 160, 69, .10), transparent 65%);
+  pointer-events: none;
+}
 .wmap { position: relative; }
-.wmap-svg { width: 100%; height: auto; display: block; }
+.wmap-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  -webkit-mask-image: radial-gradient(115% 115% at 50% 50%, #000 62%, transparent 96%);
+  mask-image: radial-gradient(115% 115% at 50% 50%, #000 62%, transparent 96%);
+}
 .country {
   fill: rgba(255, 255, 255, .09);
   stroke: rgba(11, 18, 41, .85);
