@@ -48,8 +48,15 @@ var WORLD = [["AE","United Arab Emirates","M619.874,393.722L620.373,393.573L620.
     byId[c[0]] = p;
   });
 
-  var bb = gLand.getBBox();
-  svg.setAttribute('viewBox', bb.x + ' ' + bb.y + ' ' + bb.width + ' ' + bb.height);
+  // تكبير الإطار على مناطق الأسواق (أفريقيا وآسيا والشرق الأوسط) بدل العالم كله
+  var x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
+  gLand.querySelectorAll('.market, .origin').forEach(function (p) {
+    var b = p.getBBox();
+    x0 = Math.min(x0, b.x); y0 = Math.min(y0, b.y);
+    x1 = Math.max(x1, b.x + b.width); y1 = Math.max(y1, b.y + b.height);
+  });
+  var padX = (x1 - x0) * 0.045, padTop = (y1 - y0) * 0.10, padBot = (y1 - y0) * 0.04;
+  svg.setAttribute('viewBox', (x0 - padX) + ' ' + (y0 - padTop) + ' ' + (x1 - x0 + padX * 2) + ' ' + (y1 - y0 + padTop + padBot));
 
   function center(id) {
     var p = byId[id];
